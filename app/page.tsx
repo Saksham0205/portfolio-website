@@ -197,7 +197,18 @@ export default function Portfolio() {
                   <h3 className="text-xl sm:text-2xl font-semibold group-hover:text-primary transition-colors">
                     SDE Intern
                   </h3>
-                  <p className="text-lg sm:text-xl text-muted-foreground">Spyne</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-lg sm:text-xl text-muted-foreground">Spyne</p>
+                    <a
+                      href="https://www.spyne.ai/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 transition-colors"
+                      aria-label="Visit Spyne website"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
                 <div className="sm:text-right">
                   <span className="text-sm text-muted-foreground">May 2025 – Present</span>
@@ -251,7 +262,18 @@ export default function Portfolio() {
                   <h3 className="text-xl sm:text-2xl font-semibold group-hover:text-primary transition-colors">
                     Founder
                   </h3>
-                  <p className="text-lg sm:text-xl text-muted-foreground">Ajnabee</p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-lg sm:text-xl text-muted-foreground">Ajnabee</p>
+                    <a
+                      href="https://ajnabee.in"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary/80 transition-colors"
+                      aria-label="Visit Ajnabee website"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
                 <div className="sm:text-right">
                   <span className="text-sm text-muted-foreground">Jan 2024 – Present</span>
