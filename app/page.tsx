@@ -26,7 +26,6 @@ export default function Portfolio() {
     sectionsRef.current.forEach((section) => {
       if (section) observer.observe(section)
     })
-
     return () => observer.disconnect()
   }, [])
 
