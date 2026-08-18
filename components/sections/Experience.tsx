@@ -225,7 +225,7 @@ export function Experience({ addToRefs }: ExperienceProps) {
                 <div className="flex items-center gap-2">
                   <p className="text-lg sm:text-xl text-muted-foreground">Ajnabee</p>
                   <a
-                    href="https://ajnabee.in"
+                    href="https://play.google.com/store/apps/details?id=com.ajnabee.ajnabee"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary hover:text-primary/80 transition-colors"
