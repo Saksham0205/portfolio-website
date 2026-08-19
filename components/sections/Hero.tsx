@@ -1,161 +1,122 @@
-"use client"
+"use client";
 
-import { RefObject, useState, useEffect } from "react"
-import { Github, Linkedin, Mail } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import dynamic from "next/dynamic"
-import flutterLogo from "@/components/logos/flutter.jpg"
-import mongodbLogo from "@/components/logos/mongodb-logo.png"
-import nestjsLogo from "@/components/logos/nest js.jpg"
-import firebaseLogo from "@/components/logos/firebase-logo.png"
-import githubLogo from "@/components/logos/GitHub-Symbol.png"
-import v0Logo from "@/components/logos/v0-logo.png"
-import reddyAiLogo from "@/components/logos/readdy-ai-logo.jpg"
-import pythonLogo from "@/components/logos/python-logo.png"
-
-const HeroCanvas = dynamic(
-  () => import("@/components/3d/HeroScene").then((mod) => ({ default: mod.HeroCanvas })),
-  { ssr: false }
-)
+import { RefObject } from "react";
+import { Github, Linkedin, Mail, FileText, ArrowRight } from "lucide-react";
+import { AnimatedHeading, Reveal } from "@/components/Reveal";
 
 interface HeroProps {
-  heroRef: RefObject<HTMLDivElement | null>
-}
-
-const techStack = [
-  { name: "Flutter", logo: flutterLogo, delay: "0s", needsWhiteBg: false },
-  { name: "MongoDB", logo: mongodbLogo, delay: "0.5s", needsWhiteBg: true },
-  { name: "NestJS", logo: nestjsLogo, delay: "1s", needsWhiteBg: false },
-  { name: "Firebase", logo: firebaseLogo, delay: "1.5s", needsWhiteBg: false },
-  { name: "GitHub", logo: githubLogo, delay: "2s", needsWhiteBg: true },
-  { name: "V0", logo: v0Logo, delay: "2.5s", needsWhiteBg: false },
-  { name: "Readdy AI", logo: reddyAiLogo, delay: "3s", needsWhiteBg: false },
-  { name: "Python", logo: pythonLogo, delay: "3.5s", needsWhiteBg: true },
-]
-
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false)
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 768)
-    check()
-    window.addEventListener("resize", check)
-    return () => window.removeEventListener("resize", check)
-  }, [])
-  return isDesktop
+  heroRef?: RefObject<HTMLDivElement | null>;
 }
 
 export function Hero({ heroRef }: HeroProps) {
-  const isDesktop = useIsDesktop()
-
   return (
     <section
       ref={heroRef}
-      className="relative sm:min-h-screen sm:flex sm:items-center sm:justify-center pt-20 pb-8 sm:pb-0 px-4 sm:px-6 overflow-hidden"
+      className="relative flex min-h-[100svh] flex-col justify-center px-6 pt-32 pb-20 md:px-12"
     >
-      {/* 3D Background - only loads on desktop (defaults false so never loads on mobile/SSR) */}
-      {isDesktop && <HeroCanvas />}
+      <div className="mx-auto w-full max-w-6xl">
+        {/* Status Badge */}
+        <div className="mb-10 flex items-center gap-3">
+          <span className="relative flex size-2">
+            <span className="absolute inset-0 animate-ping rounded-full bg-primary/70" />
+            <span className="size-2 rounded-full bg-primary" />
+          </span>
+          <span className="label">
+            Currently at OmniDimension - Remote (US)
+          </span>
+        </div>
 
-      {/* Mobile gradient fallback - pure CSS, always present, hidden on desktop */}
-      <div className="absolute inset-0 -z-10 sm:hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0a1a2e] to-[#0a0a0a]" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-[#00f5ff]/5 rounded-full blur-[100px]" />
+        {/* Big Display Name */}
+        <h1 className="font-display text-[clamp(2.75rem,9vw,7.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.04em]">
+          <AnimatedHeading text="Saksham" className="block" />
+          <AnimatedHeading text="Chauhan" className="block text-primary" />
+        </h1>
+
+        {/* Tagline & Key Highlights Grid */}
+        <div className="mt-12 grid gap-10 md:grid-cols-12">
+          <Reveal delay={0.5} className="md:col-span-6">
+            <p className="text-balance text-lg leading-relaxed text-foreground/85 md:text-xl">
+              I build conversational AI systems, voice agents, campaign engines, and full-stack products. SDE Intern at Spyne and Founder of Ajnabee.
+            </p>
+          </Reveal>
+          <Reveal delay={0.62} className="md:col-span-4 md:col-start-9">
+            <dl className="space-y-4 font-mono text-xs">
+              <div className="flex justify-between border-b border-border pb-2">
+                <dt className="text-muted-foreground">Role</dt>
+                <dd className="text-right font-medium">Product Engineer</dd>
+              </div>
+              <div className="flex justify-between border-b border-border pb-2">
+                <dt className="text-muted-foreground">Focus</dt>
+                <dd className="text-right font-medium">Voice AI · LLM workflows</dd>
+              </div>
+              <div className="flex justify-between border-b border-border pb-2">
+                <dt className="text-muted-foreground">Shipped</dt>
+                <dd className="text-right font-medium">5+ products · 10+ dashboards</dd>
+              </div>
+            </dl>
+          </Reveal>
+        </div>
+
+        {/* Action CTAs */}
+        <Reveal delay={0.75} className="mt-14 flex flex-wrap items-center gap-3">
+          <a
+            href="#projects"
+            className="group inline-flex items-center gap-3 bg-primary px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5"
+          >
+            See the work
+            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-3 border border-border px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
+          >
+            Get in touch
+          </a>
+          <a
+            href="https://drive.google.com/uc?export=download&id=1lwalw48e_vPbcIYh1iGyvzrhXJyFaxri"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 border border-border px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
+          >
+            <FileText className="size-3.5" />
+            Resume
+          </a>
+        </Reveal>
+
+        {/* Social Quick Links */}
+        <Reveal delay={0.85} className="mt-8 flex items-center gap-6">
+          <a
+            href="https://github.com/Saksham0205"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5"
+          >
+            <Github className="size-4" />
+            GitHub
+          </a>
+          <a
+            href="https://linkedin.com/in/saksham-chauhan-252003"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5"
+          >
+            <Linkedin className="size-4" />
+            LinkedIn
+          </a>
+          <a
+            href="mailto:saksham252003@gmail.com"
+            className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground hover:text-primary transition-colors flex items-center gap-1.5"
+          >
+            <Mail className="size-4" />
+            Email
+          </a>
+        </Reveal>
       </div>
 
-      <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left side - Content */}
-          <div className="space-y-4 sm:space-y-6 animate-fade-in">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-glow" style={{ color: "#00f5ff" }}>
-              Saksham
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl leading-relaxed">
-              SDE Intern at Spyne and Founder of Ajnabee. Building scalable products with NestJS, Flutter and modern
-              cloud technologies.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
-              <Button asChild size="lg" className="w-full sm:w-auto bg-[#00f5ff] text-[#0a0a0a] hover:bg-[#00f5ff]/80 font-semibold">
-                <a href="#contact">Get in Touch</a>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-transparent border-[#00f5ff]/30 text-[#00f5ff] hover:bg-[#00f5ff]/10 hover:border-[#00f5ff]/60">
-                <a href="#projects">View Projects</a>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-transparent border-[#00f5ff]/30 text-[#00f5ff] hover:bg-[#00f5ff]/10 hover:border-[#00f5ff]/60">
-                <a href="https://drive.google.com/uc?export=download&id=1lwalw48e_vPbcIYh1iGyvzrhXJyFaxri" download="Saksham_Resume.pdf">
-                  Download Resume
-                </a>
-              </Button>
-            </div>
-            <div className="flex gap-4 sm:gap-6 pt-2">
-              <a
-                href="https://github.com/Saksham0205"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#00f5ff] transition-colors"
-              >
-                <Github className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-              <a
-                href="https://linkedin.com/in/saksham-chauhan-252003"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-[#00f5ff] transition-colors"
-              >
-                <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-              <a href="mailto:saksham252003@gmail.com" className="text-muted-foreground hover:text-[#00f5ff] transition-colors">
-                <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-            </div>
-          </div>
-
-          {/* Right side - Floating Tech Stack */}
-          <div className="hidden lg:flex relative h-[500px] items-center justify-center">
-            <div className="relative w-full h-full">
-              {techStack.map((tech, index) => {
-                const angle = (index / techStack.length) * 2 * Math.PI
-                const radius = 175
-                const x = Math.cos(angle) * radius
-                const y = Math.sin(angle) * radius
-
-                return (
-                  <div
-                    key={tech.name}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    style={{
-                      animation: `float 3s ease-in-out infinite`,
-                      animationDelay: tech.delay,
-                    }}
-                  >
-                    <div
-                      className="flex flex-col items-center gap-2 p-4 rounded-xl bg-[#111111]/80 backdrop-blur-sm border border-[#1f1f1f] hover:border-[#00f5ff]/50 transition-all hover:scale-110 cursor-default glow-border"
-                      style={{
-                        transform: `translate(${x}px, ${y}px)`,
-                      }}
-                    >
-                      <div className={`relative w-12 h-12 rounded-lg overflow-hidden ${tech.needsWhiteBg ? 'bg-white p-1' : ''}`}>
-                        <Image
-                          src={tech.logo}
-                          alt={tech.name}
-                          fill
-                          className="object-contain"
-                          sizes="48px"
-                        />
-                      </div>
-                      <span className="text-xs font-medium whitespace-nowrap text-[#e5e5e5]">{tech.name}</span>
-                    </div>
-                  </div>
-                )
-              })}
-
-              {/* Center circle with glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-[#00f5ff]/10 border-2 border-[#00f5ff]/30 flex items-center justify-center animate-glow-pulse">
-                <span className="text-2xl">💻</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Scroll indicator */}
+      <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2">
+        <span className="label">Scroll</span>
       </div>
     </section>
-  )
+  );
 }
